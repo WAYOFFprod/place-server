@@ -8,22 +8,12 @@ This repo is for the server side of the solution.
 
 ## Project setup
 ```
-
+docker exec place-backend_laravel.test_1 php artisan migrate
 ```
 
 ### Compiles and hot-reloads for development
 ```
-
-```
-
-### Compiles and minifies for production
-```
-
-```
-
-### Lints and fixes files
-```
-
+APP_PORT=8001 ./vendor/bin/sail up -d    
 ```
 
 ### env file

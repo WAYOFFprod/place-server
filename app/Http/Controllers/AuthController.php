@@ -16,7 +16,8 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
         ]);
-        if ($validatedData->fails()) {
+        
+        if (!is_array($validatedData)) {
         return response()->json([
             'message' => 'failed validation'
         ], 401);
