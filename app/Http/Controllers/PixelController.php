@@ -39,6 +39,11 @@ class PixelController extends Controller
         return $pixels;
         //return Pixel::all();
     }
+
+    public function getAll()
+    {
+        return Pixel::get();
+    }
  
     public function show($id)
     {
