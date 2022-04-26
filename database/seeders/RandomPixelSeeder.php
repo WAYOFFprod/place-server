@@ -18,8 +18,8 @@ class RandomPixelSeeder extends Seeder
         $faker = \Faker\Factory::create();
         for ($i = 0; $i < 200000; $i++) {
             Pixel::create([
-                'x' => $faker->randomNumber(4, false),
-                'y' => $faker->randomNumber(4, false),
+                'x' => $faker->randomNumber(3, false),
+                'y' => $faker->randomNumber(3, false),
                 'color' => $faker->hexColor(),
             ]);
         }

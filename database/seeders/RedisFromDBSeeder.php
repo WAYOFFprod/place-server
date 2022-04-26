@@ -17,7 +17,8 @@ class RedisFromDBSeeder extends Seeder
      */
     public function run()
     {   
-        Redis::pipeline(function ($pipe) {
+        $pixels = (new PixelController())->getAll();
+        Redis::pipeline(function ($pipe) use($pixels) {
             $gridWidth = 1000;//Redis::get('grid:width');
             $pixels = (new PixelController())->getAll();
             foreach($pixels as $pixel){
