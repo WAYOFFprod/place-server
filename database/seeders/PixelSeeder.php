@@ -19,7 +19,7 @@ class PixelSeeder extends Seeder
         Pixel::truncate();
         Redis::flushDB();
 
-        $faker = \Faker\Factory::create();
+        //$faker = \Faker\Factory::create();
 
         // And now, let's create a few articles in our database:
         // for ($i = 0; $i < 50; $i++) {

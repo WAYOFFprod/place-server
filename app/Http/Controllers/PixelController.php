@@ -30,14 +30,29 @@ class PixelController extends Controller
     {
         $key_prefix = 'pixel:';
         $pixels = [];
-        $keys = Redis::keys($key_prefix.'*');
-        //print_r($keys);
-        foreach($keys as $pixel_key){
-            //echo(Redis::get("pixel:".explode(':',$pixel_key)[1]));
-            $pixels[explode(':',$pixel_key)[1]] = Redis::get("pixel:".explode(':',$pixel_key)[1]);
+        $keysR = Redis::keys($key_prefix.'*');
+        $keys = [];
+        foreach($keysR as $pixel_key){
+            array_push($keys, explode(':',$pixel_key)[1]);
+        }
+
+        $colors = Redis::pipeline(function ($pipe) use($keys, $pixels) {
+            for ($x = 0; $x < count($keys); $x++) {
+                Redis::get("pixel:".$keys[$x]);
+                //$pixels[$keys[$x]] = Redis::get("pixel:".$keys[$x]);
+            }
+        });
+        $pixels = [];
+        for ($x = 0; $x < count($keys); $x++) {
+            $pixels[$keys[$x]] = $colors[$x];
         }
         return $pixels;
         //return Pixel::all();
+    }
+
+    public function getAll()
+    {
+        return Pixel::get();
     }
  
     public function show($id)
