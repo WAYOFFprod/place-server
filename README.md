@@ -1,6 +1,10 @@
 when launching it for the first time run the following command to create the (mariadb)mysql table
 ```docker exec -ti place-backend_laravel.test_1 php artisan migrate```
 
+
+
+
+
 # p5-place
 This is inspired by the reddit game called place.
 This repo is for the server side of the solution.
@@ -12,6 +16,17 @@ docker exec place-backend_laravel.test_1 php artisan migrate
 ```
 
 ### Compiles and hot-reloads for development
+requires:
+docker
+```
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
+```
+launch app on port 8001
 ```
 APP_PORT=8001 ./vendor/bin/sail up -d    
 ```
