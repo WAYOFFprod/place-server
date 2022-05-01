@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pixels', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('x');
-            $table->bigInteger('y');
-            $table->string('color');
-            $table->bigInteger('user_id');
-            $table->timestamps();
+        Schema::table('pixels', function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->boolean('is_manual');
         });
     }
 
@@ -30,6 +26,11 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pixels');
+        Schema::table('pixels', function (Blueprint $table) {
+            Schema::table('pixels', function (Blueprint $table) {
+                $table->dropColumn('user_id');
+                $table->dropColumn('is_manual');
+            });
+        });
     }
 };

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use App\Models\Pixel;
 use App\Events\PixelEvent;
+use Illuminate\Support\Facades\Auth;
 
 class PixelController extends Controller
 {
@@ -14,6 +15,11 @@ class PixelController extends Controller
         $gridWidth = 1000;//Redis::get('grid:width');
         $x = $request->input('x');
         $y = $request->input('y');
+        $user = Auth::user();
+        $userID = $user->id;
+        $isManual = $request->is_manual && $request->header('Client') == 'og-place';
+        // $isManual = $request->input('isMan');
+
         if($x < $gridWidth && $y < $gridWidth && $x >= 0  && $y >= 0) {
             $c = $request->input('color');
             $iden = $x + ($gridWidth * $y);
@@ -22,7 +28,13 @@ class PixelController extends Controller
             //     $iden => $c
             // ]));
             event(new PixelEvent($x, $y, $c));
-            return Pixel::create($request->all());
+            return Pixel::create([
+                'x' => $x,
+                'y' => $y,
+                'user_id' => $userID,
+                'color' => $c,
+                'is_manual' => $isManual
+            ]);
         }
         return false;
     }
@@ -53,6 +65,11 @@ class PixelController extends Controller
     public function getAll()
     {
         return Pixel::get();
+    }
+
+    public function getUser($x, $y) {
+        $pixel = Pixel::where('x', $x)->where('y', $y)->orderBy('created_at', 'desc')->first();
+        return $pixel->user->name;
     }
  
     public function show($id)

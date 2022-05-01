@@ -9,6 +9,14 @@ class Pixel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['x', 'y', 'color'];
+    protected $fillable = ['x', 'y', 'color', 'is_manual', 'user_id'];
+
+    protected $hidden = [
+        'is_manual',
+    ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 
 }

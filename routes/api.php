@@ -31,6 +31,7 @@ Route::get('/broadcast', function () {
 Route::post('/pixels/add', [PixelController::class, 'add'])->middleware('auth:sanctum');
 Route::get('/pixels', [PixelController::class, 'index']);
 Route::get('/pixels/{id}', [PixelController::class, 'show']);
+Route::get('/pixels/{x}/{y}', [PixelController::class, 'getUser']);
 Route::post('/pixels', [PixelController::class, 'store']);
 Route::put('/pixels/{id}', [PixelController::class, 'update']);
 Route::delete('/pixels/{id}', [PixelController::class, 'delete']);
