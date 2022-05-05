@@ -9,6 +9,6 @@ class Pixel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['x', 'y', 'color'];
+    protected $fillable = ['x', 'y', 'color', 'user_id', 'is_manual'];
 
 }
