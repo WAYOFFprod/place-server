@@ -18,6 +18,7 @@ docker exec place-backend_laravel.test_1 php artisan migrate
 ### Compiles and hot-reloads for development
 requires:
 docker
+runo one to get dependencies
 ```
 docker run --rm \
     -u "$(id -u):$(id -g)" \
