@@ -69,7 +69,10 @@ class PixelController extends Controller
 
     public function getUser($x, $y) {
         $pixel = Pixel::where('x', $x)->where('y', $y)->orderBy('created_at', 'desc')->first();
-        return $pixel->user->name;
+        if(is_null($pixel)) {
+            return $pixel;
+        }
+        return $pixel->user;
     }
  
     public function show($id)
