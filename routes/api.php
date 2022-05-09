@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PixelController;
 use App\Http\Controllers\GridController;
+use App\Http\Controllers\CanvasController;
 use App\Events\PixelEvent;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
@@ -29,8 +30,8 @@ Route::get('/broadcast', function () {
 });
 
 Route::post('/pixels/add', [PixelController::class, 'add'])->middleware('auth:sanctum');
-Route::get('/pixels', [PixelController::class, 'index']);
-Route::get('/pixels/{id}', [PixelController::class, 'show']);
+Route::get('/pixels/{id}', [PixelController::class, 'getPixels']);
+Route::get('/pixel/{id}', [PixelController::class, 'show']);
 Route::get('/pixels/{x}/{y}', [PixelController::class, 'getUser']);
 Route::post('/pixels', [PixelController::class, 'store']);
 Route::put('/pixels/{id}', [PixelController::class, 'update']);
@@ -43,3 +44,7 @@ Route::middleware('auth:api')->get('/user', function(Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
+
+Route::post('/canvas/create', [CanvasController::class, 'create'])->middleware('auth:sanctum');
+Route::get('/canvas', [CanvasController::class, 'getAll']);
+Route::get('/canvas/{id}', [CanvasController::class, 'get']);

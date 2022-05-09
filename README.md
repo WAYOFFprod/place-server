@@ -1,10 +1,3 @@
-when launching it for the first time run the following command to create the (mariadb)mysql table
-```docker exec -ti place-backend_laravel.test_1 php artisan migrate```
-
-
-
-
-
 # p5-place
 This is inspired by the reddit game called place.
 This repo is for the server side of the solution.
@@ -17,8 +10,8 @@ docker exec place-backend_laravel.test_1 php artisan migrate
 
 ### Compiles and hot-reloads for development
 requires:
-docker
-runo one to get dependencies
+- docker
+run once to get dependencies
 ```
 docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -31,6 +24,11 @@ launch app on port 8001
 ```
 APP_PORT=8001 ./vendor/bin/sail up -d    
 ```
+when launching it for the first time run the following command to create the (mariadb)mysql table
+```
+docker exec -ti place-server_laravel.test_1 php artisan migrate
+```
+
 
 ### env file
 ```
@@ -71,5 +69,11 @@ PUSHER_APP_CLUSTER=mt1
 
 MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+ADMIN_USERNAME="Admin"
+ADMIN_EMAIL="admin@admin.com"
+ADMIN_PASSWORD="password"
+
+CANVAS_PER_USER=2
 
 ```

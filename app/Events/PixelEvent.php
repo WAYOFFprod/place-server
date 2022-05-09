@@ -18,17 +18,19 @@ class PixelEvent implements ShouldBroadcast
     public $x;
     public $y;
     public $color;
+    public $canvas;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($x, $y, $color)
+    public function __construct($x, $y, $color, $canvas)
     {
         $this->x = $x;
         $this->y = $y;
         $this->color = $color;
+        $this->canvas = $canvas;
     }
 
     public function broadcastWith () {
@@ -47,6 +49,6 @@ class PixelEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('pixel-change');
+        return new Channel('pixel-change-'.$this->canvas);
     }
 }

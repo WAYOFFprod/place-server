@@ -20,7 +20,6 @@ class RedisFromDBSeeder extends Seeder
         $pixels = (new PixelController())->getAll();
         Redis::pipeline(function ($pipe) use($pixels) {
             $gridWidth = 1000;//Redis::get('grid:width');
-            $pixels = (new PixelController())->getAll();
             foreach($pixels as $pixel){
                 $iden = $pixel->x + ($gridWidth * $pixel->y);
                 $pipe->set('pixel:'.$iden, $pixel->color);
