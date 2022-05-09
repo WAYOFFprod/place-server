@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('manual_allowed');
             $table->bigInteger('owner');
             $table->boolean('private');
+            $table->string('label');
         });
     }
 

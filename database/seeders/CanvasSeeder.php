@@ -22,6 +22,7 @@ class CanvasSeeder extends Seeder
             'manual_allowed' => true,
             'owner' => 1,
             'private' => false,
+            'label' => 'Anarchy canvas'
         ]);
     }
 }
