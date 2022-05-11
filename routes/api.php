@@ -33,6 +33,7 @@ Route::post('/pixels/add', [PixelController::class, 'add'])->middleware('auth:sa
 Route::get('/pixels/{id}', [PixelController::class, 'getPixels']);
 Route::get('/pixel/{id}', [PixelController::class, 'show']);
 Route::get('/pixels/{x}/{y}', [PixelController::class, 'getUser']);
+Route::get('/pixels/{board}/{x}/{y}', [PixelController::class, 'getUserWithBoard']);
 Route::post('/pixels', [PixelController::class, 'store']);
 Route::put('/pixels/{id}', [PixelController::class, 'update']);
 Route::delete('/pixels/{id}', [PixelController::class, 'delete']);
@@ -48,3 +49,5 @@ Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::post('/canvas/create', [CanvasController::class, 'create'])->middleware('auth:sanctum');
 Route::get('/canvas', [CanvasController::class, 'getAll']);
 Route::get('/canvas/{id}', [CanvasController::class, 'get']);
+Route::post('/canvas/{id}', [CanvasController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/canvas/{id}', [CanvasController::class, 'delete'])->middleware('auth:sanctum');

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger('height');
             $table->boolean('script_allowed');
             $table->boolean('manual_allowed');
-            $table->bigInteger('owner');
+            $table->bigInteger('user_id');
             $table->boolean('private');
             $table->string('label');
         });

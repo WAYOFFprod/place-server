@@ -20,7 +20,7 @@ class CanvasSeeder extends Seeder
             'height' => 1000,
             'script_allowed' => true,
             'manual_allowed' => true,
-            'owner' => 1,
+            'user_id' => 1,
             'private' => false,
             'label' => 'Anarchy canvas'
         ]);

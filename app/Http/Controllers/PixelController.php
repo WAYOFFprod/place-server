@@ -41,7 +41,6 @@ class PixelController extends Controller
         
         
         $isManual = $request->input('is_manual') && $request->header('Client') == 'og-place';
-        // $isManual = $request->input('isMan');
         if(!$canvas->script_allowed && !$isManual) {
             return response()->json(array(
                 'code'      =>  401,
@@ -49,7 +48,7 @@ class PixelController extends Controller
             ), 401);
         }
 
-        if($canvas->manual_allowed && $isManual) {
+        if(!$canvas->manual_allowed && $isManual) {
             return response()->json(array(
                 'code'      =>  401,
                 'message'   =>  "Manual pixel placement not allowed on this canvas"
@@ -110,7 +109,15 @@ class PixelController extends Controller
     }
 
     public function getUser($x, $y) {
-        $pixel = Pixel::where('x', $x)->where('y', $y)->orderBy('created_at', 'desc')->first();
+        $pixel = Pixel::where('table_id', 1)->where('x', $x)->where('y', $y)->orderBy('created_at', 'desc')->first();
+        if(is_null($pixel)) {
+            return $pixel;
+        }
+        return $pixel->user;
+    }
+
+    public function getUserWithBoard($board, $x, $y) {
+        $pixel = Pixel::where('table_id', $board)->where('x', $x)->where('y', $y)->orderBy('created_at', 'desc')->first();
         if(is_null($pixel)) {
             return $pixel;
         }

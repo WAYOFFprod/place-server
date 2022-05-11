@@ -9,7 +9,7 @@ class Canvas extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['width', 'height', 'script_allowed', 'manual_allowed', 'owner', 'private', 'label'];
+    protected $fillable = ['width', 'height', 'script_allowed', 'manual_allowed', 'user_id', 'private', 'label'];
 
     protected $attributes = [
         'width' => 1000,
@@ -19,4 +19,8 @@ class Canvas extends Model
         'private' => true,
         'label' => 'canvas'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

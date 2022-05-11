@@ -14,8 +14,8 @@ class CanvasController extends Controller
         $user = Auth::user();
         $userID = $user->id;
 
-        $ownedCanvases = Canvas::where('owner', $userID)->count();
-        if($ownedCanvases >= env('CANVAS_PER_USER', 2)) {
+        $ownedCanvases = Canvas::where('user_id', $userID)->count();
+        if($ownedCanvases >= env('CANVAS_PER_USER', 2) && $userID != 1) {
             return response()->json(array(
                 'code'      =>  401,
                 'message'   =>  "You have too many canvas"
@@ -27,8 +27,9 @@ class CanvasController extends Controller
             'height' => $request->input('height'),
             'script_allowed' => $request->input('script_allowed'),
             'manual_allowed' => $request->input('manual_allowed'),
-            'owner' => $userID,
-            'private' => $request->input('is_private'),
+            'user_id' => $userID,
+            'private' => $request->input('private'),
+            'label' => $request->input('label'),
         ]);
     }
 
@@ -42,9 +43,13 @@ class CanvasController extends Controller
         $user = auth('sanctum')->user();
         if(!is_null($user)) {
             $userID = $user->id;
-            return Canvas::where('private', false)->orWhere('owner', $userID)->get();
+            $canvas = Canvas::where('private', false)->orWhere('user_id', $userID)->get();
+            //print_r($canvas);
+            return $canvas;
         }
-        return Canvas::where('private', false)->get();
+        $canvas = Canvas::where('private', false)->get();
+        //print_r($canvas);
+        return $canvas;
     }
 
     public function update(Request $request, $id)
@@ -53,5 +58,13 @@ class CanvasController extends Controller
         $article->update($request->all());
 
         return $article;
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $article = Canvas::findOrFail($id);
+        $article->delete();
+
+        return 204;
     }
 }
