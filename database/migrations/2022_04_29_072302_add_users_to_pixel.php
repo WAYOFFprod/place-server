@@ -27,10 +27,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('pixels', function (Blueprint $table) {
-            Schema::table('pixels', function (Blueprint $table) {
-                $table->dropColumn('user_id');
-                $table->dropColumn('is_manual');
-            });
+            $table->dropColumn('user_id');
+            $table->dropColumn('is_manual');
         });
     }
 };

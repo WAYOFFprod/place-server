@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\UserCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,7 +18,8 @@ class Canvas extends Model
         'script_allowed' => true,
         'manual_allowed' => true,
         'private' => true,
-        'label' => 'canvas'
+        'label' => 'canvas',
+        'user_id' => 1
     ];
 
     public function user() {

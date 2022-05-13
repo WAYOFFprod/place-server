@@ -15,12 +15,12 @@ return new class extends Migration
     public function up()
     {
         Schema::table('pixels', function (Blueprint $table) {
-            $table->integer('table_id');
+            $table->integer('canvas_id');
         });
 
         $pixels = Pixel::get();
         foreach($pixels as $pixel) {
-            Pixel::where('table_id', 0)->update(['table_id' => 1]);
+            Pixel::where('canvas_id', 0)->update(['canvas_id' => 1]);
         }
     }
 
@@ -32,7 +32,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('pixels', function (Blueprint $table) {
-            $table->dropColumn('table_id');
+            $table->dropColumn('canvas_id');
         });
     }
 };

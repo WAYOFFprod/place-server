@@ -71,7 +71,7 @@ class PixelController extends Controller
                 'user_id' => $userID,
                 'color' => $c,
                 'is_manual' => $isManual,
-                'table_id' => $canvas_id
+                'canvas_id' => $canvas_id
             ]);
         }
         return response()->json(array(
@@ -109,7 +109,7 @@ class PixelController extends Controller
     }
 
     public function getUser($x, $y) {
-        $pixel = Pixel::where('table_id', 1)->where('x', $x)->where('y', $y)->orderBy('created_at', 'desc')->first();
+        $pixel = Pixel::where('canvas_id', 1)->where('x', $x)->where('y', $y)->orderBy('created_at', 'desc')->first();
         if(is_null($pixel)) {
             return $pixel;
         }
@@ -117,11 +117,11 @@ class PixelController extends Controller
     }
 
     public function getUserWithBoard($board, $x, $y) {
-        $pixel = Pixel::where('table_id', $board)->where('x', $x)->where('y', $y)->orderBy('created_at', 'desc')->first();
+        $pixel = Pixel::where('canvas_id', $board)->where('x', $x)->where('y', $y)->orderBy('created_at', 'desc')->first();
         if(is_null($pixel)) {
             return $pixel;
         }
-        return $pixel->user;
+        return $pixel->canvas;
     }
  
     public function show($id)

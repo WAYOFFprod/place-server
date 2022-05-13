@@ -18,7 +18,6 @@ return new class extends Migration
             $table->bigInteger('x');
             $table->bigInteger('y');
             $table->string('color');
-            $table->bigInteger('user_id');
             $table->timestamps();
         });
     }

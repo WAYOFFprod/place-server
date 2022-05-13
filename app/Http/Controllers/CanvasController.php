@@ -21,7 +21,7 @@ class CanvasController extends Controller
                 'message'   =>  "You have too many canvas"
             ), 401);
         }
-
+        
         return Canvas::create([
             'width' => $request->input('width'),
             'height' => $request->input('height'),
@@ -44,12 +44,11 @@ class CanvasController extends Controller
         if(!is_null($user)) {
             $userID = $user->id;
             $canvas = Canvas::where('private', false)->orWhere('user_id', $userID)->get();
-            //print_r($canvas);
-            return $canvas;
+            return $canvas->loadMissing('user');
         }
         $canvas = Canvas::where('private', false)->get();
         //print_r($canvas);
-        return $canvas;
+        return $canvas->loadMissing('user');
     }
 
     public function update(Request $request, $id)

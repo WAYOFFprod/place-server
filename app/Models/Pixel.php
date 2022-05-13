@@ -9,7 +9,7 @@ class Pixel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['x', 'y', 'color', 'is_manual', 'user_id', 'table_id'];
+    protected $fillable = ['x', 'y', 'color', 'is_manual', 'user_id', 'canvas_id'];
 
     protected $hidden = [
         'is_manual',
@@ -17,6 +17,9 @@ class Pixel extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+    public function canvas() {
+        return $this->belongsTo(Canvas::class);
     }
 
 }
