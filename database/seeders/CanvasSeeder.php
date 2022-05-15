@@ -22,7 +22,7 @@ class CanvasSeeder extends Seeder
             'manual_allowed' => true,
             'user_id' => 1,
             'private' => false,
-            'label' => 'Anarchy canvas'
+            'label' => 'Anarchy Canvas'
         ]);
         Canvas::create([
             'width' => 1000,

@@ -40,7 +40,7 @@ class PixelController extends Controller
 
         
         
-        $isManual = $request->input('is_manual') && $request->header('Client') == 'og-place';
+        $isManual = $request->input('is_manual') && $request->header('Client') == 'og-place' && $request->getHttpHost() == "localhost:8001";
         if(!$canvas->script_allowed && !$isManual) {
             return response()->json(array(
                 'code'      =>  401,
