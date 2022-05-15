@@ -11,10 +11,6 @@ class Pixel extends Model
 
     protected $fillable = ['x', 'y', 'color', 'is_manual', 'user_id', 'canvas_id'];
 
-    protected $hidden = [
-        'is_manual',
-    ];
-
     public function user() {
         return $this->belongsTo(User::class);
     }
