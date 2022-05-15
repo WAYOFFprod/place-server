@@ -18,10 +18,7 @@ return new class extends Migration
             $table->integer('canvas_id');
         });
 
-        $pixels = Pixel::get();
-        foreach($pixels as $pixel) {
-            Pixel::where('canvas_id', 0)->update(['canvas_id' => 1]);
-        }
+        Pixel::where('canvas_id', 0)->update(['canvas_id' => 1]);
     }
 
     /**
