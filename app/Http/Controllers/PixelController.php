@@ -121,7 +121,7 @@ class PixelController extends Controller
         if(is_null($pixel)) {
             return $pixel;
         }
-        return $pixel->canvas;
+        return $pixel->user;
     }
  
     public function show($id)
