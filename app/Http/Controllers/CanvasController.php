@@ -21,7 +21,7 @@ class CanvasController extends Controller
                 'message'   =>  "You have too many canvas"
             ), 401);
         }
-        
+
         return Canvas::create([
             'width' => $request->input('width'),
             'height' => $request->input('height'),
@@ -30,7 +30,7 @@ class CanvasController extends Controller
             'user_id' => $userID,
             'private' => $request->input('private'),
             'label' => $request->input('label'),
-        ]);
+        ])->loadMissing('user');
     }
 
     public function get($id) {
@@ -56,7 +56,7 @@ class CanvasController extends Controller
         $article = Canvas::findOrFail($id);
         $article->update($request->all());
 
-        return $article;
+        return $article->loadMissing('user');
     }
 
     public function delete(Request $request, $id)

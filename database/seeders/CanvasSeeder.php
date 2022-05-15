@@ -24,5 +24,23 @@ class CanvasSeeder extends Seeder
             'private' => false,
             'label' => 'Anarchy canvas'
         ]);
+        Canvas::create([
+            'width' => 1000,
+            'height' => 1000,
+            'script_allowed' => false,
+            'manual_allowed' => true,
+            'user_id' => 1,
+            'private' => false,
+            'label' => 'Drawing Only'
+        ]);
+        Canvas::create([
+            'width' => 1000,
+            'height' => 1000,
+            'script_allowed' => true,
+            'manual_allowed' => false,
+            'user_id' => 1,
+            'private' => false,
+            'label' => 'Script Only'
+        ]);
     }
 }
