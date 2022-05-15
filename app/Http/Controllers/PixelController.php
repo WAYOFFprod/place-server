@@ -122,6 +122,14 @@ class PixelController extends Controller
         }
         return $pixel->user;
     }
+
+    public function get($board, $x, $y) {
+        $pixel = Pixel::where('canvas_id', $board)->where('x', $x)->where('y', $y)->orderBy('created_at', 'desc')->first();
+        if(is_null($pixel)) {
+            return $pixel;
+        }
+        return $pixel->loadMissing('user');
+    }
  
     public function show($id)
     {
