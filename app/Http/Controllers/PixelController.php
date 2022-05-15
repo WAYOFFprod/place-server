@@ -130,6 +130,20 @@ class PixelController extends Controller
         }
         return $pixel->loadMissing('user');
     }
+
+    public function getColor($canvas_id, $x, $y) {
+        $canvas = Canvas::find($canvas_id);
+        if(is_null($canvas)) {
+            return response()->json(array(
+                'code'      =>  400,
+                'message'   =>  "canvas '".$canvas_id."' doesn't exist"
+            ), 400);
+        }
+        $gridWidth = $canvas->width;
+
+        $iden = $x + ($gridWidth * $y);
+        return Redis::get("pixel-".$canvas_id.":".$iden);
+    }
  
     public function show($id)
     {

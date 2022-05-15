@@ -35,6 +35,7 @@ Route::get('/pixel/{id}', [PixelController::class, 'show']);
 Route::get('/pixels/{x}/{y}', [PixelController::class, 'getUser']);
 Route::get('/pixel/user/{board}/{x}/{y}', [PixelController::class, 'getUserWithBoard']);
 Route::get('/pixel/{board}/{x}/{y}', [PixelController::class, 'get']);
+Route::get('/pixel/color/{board}/{x}/{y}', [PixelController::class, 'getColor']);
 Route::post('/pixels', [PixelController::class, 'store']);
 Route::put('/pixels/{id}', [PixelController::class, 'update']);
 Route::delete('/pixels/{id}', [PixelController::class, 'delete']);
