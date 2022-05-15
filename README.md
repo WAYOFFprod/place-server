@@ -37,6 +37,7 @@ APP_ENV=local
 APP_KEY=app_key
 APP_DEBUG=true
 APP_URL=app_url
+APP_ORIGIN_URL=localhost:8001
 
 LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
