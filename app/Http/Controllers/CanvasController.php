@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Canvas;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,12 +31,18 @@ class CanvasController extends Controller
             'user_id' => $userID,
             'private' => $request->input('private'),
             'label' => $request->input('label'),
-        ])->loadMissing('user');
+            'preview_id' => 1,
+        ])->loadMissing('user')->loadMissing('preview');
     }
 
     public function get($id) {
         $canvas = Canvas::where('id', $id)->get();
         return $canvas;
+    }
+
+    public function getPreview($id) {
+        $canvas = Canvas::where('id', $id)->get();
+        return $canvas->loadMissing('preview');
     }
 
     public function getAll()
@@ -44,11 +51,11 @@ class CanvasController extends Controller
         if(!is_null($user)) {
             $userID = $user->id;
             $canvas = Canvas::where('private', false)->orWhere('user_id', $userID)->get();
-            return $canvas->loadMissing('user');
+            return $canvas->loadMissing('user')->loadMissing('preview');
         }
         $canvas = Canvas::where('private', false)->get();
         //print_r($canvas);
-        return $canvas->loadMissing('user');
+        return $canvas->loadMissing('user')->loadMissing('preview');
     }
 
     public function update(Request $request, $id)
@@ -56,7 +63,7 @@ class CanvasController extends Controller
         $article = Canvas::findOrFail($id);
         $article->update($request->all());
 
-        return $article->loadMissing('user');
+        return $article->loadMissing('user')->loadMissing('preview');
     }
 
     public function delete(Request $request, $id)

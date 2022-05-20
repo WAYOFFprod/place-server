@@ -23,24 +23,24 @@ return new class extends Migration
                 $pipe->set('pixel:'.$iden, $pixel->color);
             }
         });
-        $key_prefix = 'pixel:';
-        $keysR = Redis::keys($key_prefix.'*');
-        $keys = [];
-        foreach($keysR as $pixel_key){
-            array_push($keys, explode(':',$pixel_key)[1]);
-        }
+        // $key_prefix = 'pixel:';
+        // $keysR = Redis::keys($key_prefix.'*');
+        // $keys = [];
+        // foreach($keysR as $pixel_key){
+        //     array_push($keys, explode(':',$pixel_key)[1]);
+        // }
 
-        $colors = Redis::pipeline(function ($pipe) use($keys, $pixels) {
-            for ($x = 0; $x < count($keys); $x++) {
-                Redis::get("pixel:".$keys[$x]);
-            }
-        });
-        $id = 1;
-        Redis::pipeline(function ($pipe) use($keys, $colors, $id) {
-            for ($x = 0; $x < count($keys); $x++) {
-                Redis::set("pixel-".$id.":".$keys[$x], $colors[$x]);
-            }
-        });
+        // $colors = Redis::pipeline(function ($pipe) use($keys, $pixels) {
+        //     for ($x = 0; $x < count($keys); $x++) {
+        //         Redis::get("pixel:".$keys[$x]);
+        //     }
+        // });
+        // $id = 1;
+        // Redis::pipeline(function ($pipe) use($keys, $colors, $id) {
+        //     for ($x = 0; $x < count($keys); $x++) {
+        //         Redis::set("pixel-".$id.":".$keys[$x], $colors[$x]);
+        //     }
+        // });
     }
 
     /**

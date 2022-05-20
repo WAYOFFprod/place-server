@@ -109,6 +109,7 @@ class PixelController extends Controller
 
     public function getUser($x, $y) {
         $pixel = Pixel::where('canvas_id', 1)->where('x', $x)->where('y', $y)->orderBy('created_at', 'desc')->first();
+        print_r($pixel);
         if(is_null($pixel)) {
             return $pixel;
         }

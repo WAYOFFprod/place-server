@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PixelController;
 use App\Http\Controllers\GridController;
 use App\Http\Controllers\CanvasController;
+use App\Http\Controllers\ImageController;
 use App\Events\PixelEvent;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
@@ -53,3 +54,7 @@ Route::get('/canvas', [CanvasController::class, 'getAll']);
 Route::get('/canvas/{id}', [CanvasController::class, 'get']);
 Route::post('/canvas/{id}', [CanvasController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('/canvas/{id}', [CanvasController::class, 'delete'])->middleware('auth:sanctum');
+
+
+Route::post('/add-preview', [ImageController::class, 'upload']);
+Route::get('/image/canvas/{id}',[CanvasController::class, 'getPreview']);
