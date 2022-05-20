@@ -29,6 +29,11 @@ when launching it for the first time run the following command to create the (ma
 docker exec -ti place-server_laravel.test_1 php artisan migrate
 ```
 
+link storeage
+```
+docker exec -ti place-server_laravel.test_1 php artisan storage:link
+```
+
 
 ### env file
 ```
