@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('label');
-            $table->string('data');
+            $table->string('data', 10000);
             $table->boolean('is_private');
             $table->integer('user_id');
             $table->integer('color_selection_id')->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('label');
-            $table->string('data');
+            $table->string('data', 10000);
             $table->boolean('is_private');
             $table->integer('user_id');
             $table->integer('pixel_array_id')->nullable();
