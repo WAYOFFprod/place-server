@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('canvases', function (Blueprint $table) {
-            $table->integer('preview_id');
+            $table->integer('preview_id')->nullable();
         });
     }
 

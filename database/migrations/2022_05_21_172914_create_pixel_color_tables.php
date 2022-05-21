@@ -13,23 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pixel_array', function (Blueprint $table) {
+        Schema::create('pixel_arrays', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('label');
             $table->string('data');
-            $table->string('is_private');
+            $table->boolean('is_private');
             $table->integer('user_id');
-            $table->integer('color_selection_id');
+            $table->integer('color_selection_id')->nullable();
         });
-        Schema::create('color_selection', function (Blueprint $table) {
+        Schema::create('color_selections', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('label');
             $table->string('data');
-            $table->string('is_private');
+            $table->boolean('is_private');
             $table->integer('user_id');
-            $table->integer('color_selection_id');
+            $table->integer('pixel_array_id')->nullable();
         });
     }
 
@@ -40,7 +40,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pixel_array');
-        Schema::dropIfExists('color_selection');
+        Schema::dropIfExists('pixel_arrays');
+        Schema::dropIfExists('color_selections');
     }
 };

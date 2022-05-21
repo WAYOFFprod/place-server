@@ -47,8 +47,10 @@ class ImageController extends Controller
             'path' => $path,
         ]);
         print_r($image->id);
-        $article = Canvas::findOrFail($canvas_id);
-        $article->update(array('preview_id' => $image->id));
+        $canvas = Canvas::findOrFail($canvas_id);
+        $canvas->preview()->associate($image);
+
+        $canvas->save();
         
         return response()->json([
             "success" => true,

@@ -6,6 +6,7 @@ use App\Http\Controllers\PixelController;
 use App\Http\Controllers\GridController;
 use App\Http\Controllers\CanvasController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PresetController;
 use App\Events\PixelEvent;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
@@ -58,3 +59,7 @@ Route::delete('/canvas/{id}', [CanvasController::class, 'delete'])->middleware('
 
 Route::post('/add-preview', [ImageController::class, 'upload']);
 Route::get('/image/canvas/{id}',[CanvasController::class, 'getPreview']);
+
+Route::post('/preset/add', [PresetController::class, 'add'])->middleware('auth:sanctum');
+Route::get('/preset/colors',[PresetController::class, 'getColors']);
+Route::get('/preset/pixels',[PresetController::class, 'getArrays']);

@@ -9,12 +9,14 @@ class ColorSelection extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['label', 'data', 'isPrivate'];
+    protected $fillable = ['user_id', 'label', 'data', 'is_private', 'pixel_array_id'];
+
+
 
     public function user() {
         return $this->belongsTo(User::class);
     }
     public function pixelArray() {
-        return $this->belongsTo(PixelArray::class);
+        return $this->hasOne(PixelArray::class, 'pixel_array_id');
     }
 }

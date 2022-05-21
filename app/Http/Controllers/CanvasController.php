@@ -21,9 +21,9 @@ class CanvasController extends Controller
                 'code'      =>  401,
                 'message'   =>  "You have too many canvas"
             ), 401);
-        }
+        }  
 
-        return Canvas::create([
+        $canvas = Canvas::create([
             'width' => $request->input('width'),
             'height' => $request->input('height'),
             'script_allowed' => $request->input('script_allowed'),
@@ -31,8 +31,9 @@ class CanvasController extends Controller
             'user_id' => $userID,
             'private' => $request->input('private'),
             'label' => $request->input('label'),
-            'preview_id' => 1,
         ])->loadMissing('user')->loadMissing('preview');
+
+        return $canvas;
     }
 
     public function get($id) {

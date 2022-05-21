@@ -9,13 +9,13 @@ class PixelArray extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['label', 'data', 'is_private'];
+    protected $fillable = ['user_id', 'label', 'data', 'is_private', 'color_selection_id'];
 
     public function user() {
         return $this->belongsTo(User::class);
     }
 
     public function colorSelection() {
-        return $this->belongsTo(ColorSelection::class);
+        return $this->belongsTo(ColorSelection::class, 'color_selection_id');
     }
 }
