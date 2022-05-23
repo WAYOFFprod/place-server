@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Canvas;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,6 +15,18 @@ class CanvasController extends Controller
         // get user that sent request using attached token
         $user = Auth::user();
         $userID = $user->id;
+        
+        $validator = Validator::make($request->all(),[ 
+            'width' => 'required|numeric|between:0,1000',
+            'height' => 'required|numeric|between:0,1000',
+            'label' => 'required|string|max:255'
+        ]);
+
+
+
+        if($validator->fails()) {         
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
 
         $ownedCanvases = Canvas::where('user_id', $userID)->count();
         if($ownedCanvases >= env('CANVAS_PER_USER', 2) && $userID != 1) {

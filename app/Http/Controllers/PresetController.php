@@ -14,6 +14,12 @@ class PresetController extends Controller
         $user = Auth::user();
         $userID = $user->id;
 
+        $validator = Validator::make($request->all(),[ 
+            'p_data' => 'required|string|max:10000',
+            'p_label' => 'required|string|max:255',
+            'c_data' => 'required|string|max:10000',
+        ]);
+
         $cs = ColorSelection::create([
             'label' => $request->input('c_label'),
             'data' => $request->input('c_data'),
