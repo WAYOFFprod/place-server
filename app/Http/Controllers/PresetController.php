@@ -7,6 +7,7 @@ use App\Models\ColorSelection;
 use App\Models\PixelArray;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class PresetController extends Controller
 {
