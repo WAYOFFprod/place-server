@@ -83,3 +83,4 @@ ADMIN_PASSWORD="password"
 CANVAS_PER_USER=2
 
 ```
+
